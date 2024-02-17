@@ -1,65 +1,109 @@
 import random
 
-dealer_deck = {
-    1: ['Ace', 'Spades'], 
-    2: ['2', 'Spades'], 
-    3: ['3', 'Spades'], 
-    4: ['4', 'Spades'], 
-    5: ['5', 'Spades'], 
-    6: ['6', 'Spades'], 
-    7: ['7', 'Spades'], 
-    8: ['8', 'Spades'], 
-    9: ['9', 'Spades'], 
-    10: ['10', 'Spades'], 
-    11: ['Jack', 'Spades'], 
-    12: ['Queen', 'Spades'], 
-    13: ['King', 'Spades'],
-    14: ['Ace', 'Hearts'], 
-    15: ['2', 'Hearts'], 
-    16: ['3', 'Hearts'], 
-    17: ['4', 'Hearts'], 
-    18: ['5', 'Hearts'], 
-    19: ['6', 'Hearts'], 
-    20: ['7', 'Hearts'], 
-    21: ['8', 'Hearts'], 
-    22: ['9', 'Hearts'], 
-    23: ['10', 'Hearts'], 
-    24: ['Jack', 'Hearts'], 
-    25: ['Queen', 'Hearts'], 
-    26: ['King', 'Hearts'],
-    27: ['Ace', 'Clubs'], 
-    28: ['2', 'Clubs'], 
-    29: ['3', 'Clubs'], 
-    30: ['4', 'Clubs'], 
-    31: ['5', 'Clubs'], 
-    32: ['6', 'Clubs'], 
-    33: ['7', 'Clubs'], 
-    34: ['8', 'Clubs'], 
-    35: ['9', 'Clubs'], 
-    36: ['10', 'Clubs'], 
-    37: ['Jack', 'Clubs'], 
-    38: ['Queen', 'Clubs'], 
-    39: ['King', 'Clubs'],
-    40: ['Ace', 'Diamonds'], 
-    41: ['2', 'Diamonds'], 
-    42: ['3', 'Diamonds'], 
-    43: ['4', 'Diamonds'], 
-    44: ['5', 'Diamonds'], 
-    45: ['6', 'Diamonds'], 
-    46: ['7', 'Diamonds'], 
-    47: ['8', 'Diamonds'], 
-    48: ['9', 'Diamonds'], 
-    49: ['10', 'Diamonds'], 
-    50: ['Jack', 'Diamonds'], 
-    51: ['Queen', 'Diamonds'], 
-    52: ['King', 'Diamonds']
-}
+dealer_deck = [
+    ['Ace', 'Spades'], 
+    ['2', 'Spades'], 
+    ['3', 'Spades'], 
+    ['4', 'Spades'], 
+    ['5', 'Spades'], 
+    ['6', 'Spades'], 
+    ['7', 'Spades'], 
+    ['8', 'Spades'], 
+    ['9', 'Spades'], 
+    ['10', 'Spades'], 
+    ['Jack', 'Spades'], 
+    ['Queen', 'Spades'], 
+    ['King', 'Spades'],
+    ['Ace', 'Hearts'],  
+    ['2', 'Hearts'], 
+    ['3', 'Hearts'], 
+    ['4', 'Hearts'], 
+    ['5', 'Hearts'], 
+    ['6', 'Hearts'], 
+    ['7', 'Hearts'], 
+    ['8', 'Hearts'], 
+    ['9', 'Hearts'], 
+    ['10', 'Hearts'], 
+    ['Jack', 'Hearts'], 
+    ['Queen', 'Hearts'], 
+    ['King', 'Hearts'],
+    ['Ace', 'Clubs'],
+    ['2', 'Clubs'], 
+    ['3', 'Clubs'],
+    ['4', 'Clubs'], 
+    ['5', 'Clubs'], 
+    ['6', 'Clubs'], 
+    ['7', 'Clubs'], 
+    ['8', 'Clubs'],
+    ['9', 'Clubs'], 
+    ['10', 'Clubs'], 
+    ['Jack', 'Clubs'],
+    ['Queen', 'Clubs'], 
+    ['King', 'Clubs'],
+    ['Ace', 'Diamonds'], 
+    ['2', 'Diamonds'], 
+    ['3', 'Diamonds'], 
+    ['4', 'Diamonds'], 
+    ['5', 'Diamonds'],
+    ['6', 'Diamonds'], 
+    ['7', 'Diamonds'], 
+    ['8', 'Diamonds'], 
+    ['9', 'Diamonds'], 
+    ['10', 'Diamonds'], 
+    ['Jack', 'Diamonds'], 
+    ['Queen', 'Diamonds'], 
+    ['King', 'Diamonds']
+]
+
+used_cards = [
+
+]
+
+def burn_card():
+    rand_card = random.randint(0, 51)
+    burn_card = dealer_deck.pop(rand_card)
+    used_cards.append(burn_card)
 
 def deal_card():
-    card = random.randint(1, 52)
+    rand_card = random.randint(0, len(dealer_deck))
     connect = " of "
-    str_deck = list(dealer_deck.get(card))
+    str_deck = dealer_deck[rand_card]
+    remove_card = dealer_deck.pop(rand_card)
+    used_cards.append(remove_card)
+    print('Your first card is...')
     print(('The ') + (connect.join(str_deck)))
+
+def deal_2nd_card():
+    rand_card = random.randint(0, len(dealer_deck))
+    connect = " of "
+    str_deck = dealer_deck[rand_card]
+    remove_card = dealer_deck.pop(rand_card)
+    used_cards.append(remove_card)
+    print('Your second card is...')
+    print(('The ') + (connect.join(str_deck)))
+
+def deal_card_dealer():
+    rand_card = random.randint(0, len(dealer_deck))
+    remove_card = dealer_deck.pop(rand_card)
+    used_cards.append(remove_card)
+    print("The dealer's first card is hidden.")
+
+def deal_2nd_card_dealer():
+    rand_card = random.randint(0, len(dealer_deck))
+    connect = " of "
+    str_deck = dealer_deck[rand_card]
+    remove_card = dealer_deck.pop(rand_card)
+    used_cards.append(remove_card)
+    print("The dealer's second card is...")
+    print(('The ') + (connect.join(str_deck)))
+
+
+def round_deal_phase():
+    deal_card()
+    deal_card_dealer()
+    deal_2nd_card()
+    deal_2nd_card_dealer()
+
     
 # Introduction
 
@@ -87,9 +131,5 @@ else:
 # Game Loop
     
 while play_response.lower() =='yes':
-    print('Your first card is...')
-    deal_card()
-    print('Your second card is...')
-    deal_card()
+    round_deal_phase()
     break
-    
