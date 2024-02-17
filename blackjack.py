@@ -1,3 +1,5 @@
+import random
+
 dealer_deck = {
     1: ['Ace', 'Spades'], 
     2: ['2', 'Spades'], 
@@ -53,3 +55,41 @@ dealer_deck = {
     52: ['King', 'Diamonds']
 }
 
+def deal_card():
+    card = random.randint(1, 52)
+    connect = " of "
+    str_deck = list(dealer_deck.get(card))
+    print(('The ') + (connect.join(str_deck)))
+    
+# Introduction
+
+print('Welcome to the House of Blackjack. Where we always win!')
+play_response = input('Would you like to play? Yes or No:')
+
+if play_response.lower =='':
+    print('No input provided, please restart the program.')
+
+    exit()
+
+elif play_response.lower() =='yes':
+    pass
+
+elif play_response.lower() =='no':
+    print('Well okay! Please restart the program if you would like to use me later!')
+
+    exit()
+
+else:
+    print('Not a vaild response, please restart the program.')
+
+    exit()
+
+# Game Loop
+    
+while play_response.lower() =='yes':
+    print('Your first card is...')
+    deal_card()
+    print('Your second card is...')
+    deal_card()
+    break
+    
