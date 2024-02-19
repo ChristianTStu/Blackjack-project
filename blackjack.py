@@ -112,7 +112,6 @@ tens = [
     'King of Hearts',
     'King of Clubs',
     'King of Diamonds'
-
 ]
 
 
@@ -175,7 +174,7 @@ def player_hand_check():
     count_with_eleven = count + ace_as_eleven
 
     if count_with_eleven == 21:
-        print(f'Winner Winner, Chicken Dinner. Thats 21. Blackjack!!!')
+        print('Winner Winner, Chicken Dinner. Thats 21. Blackjack!!!')
     elif count_with_eleven > 21:
         print(f'You have two Aces!! Wow :). That makes your soft count 22, because of this you must choose your hard count of: {count_with_one}. How would you like to proceed?')
     elif (count_with_one and count_with_eleven < 21) and (count_with_one and count_with_eleven > 0): 
