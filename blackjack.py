@@ -165,7 +165,7 @@ def player_hand_check():
         elif card in tens:
             count += 10
 
-    if ace_as_one and ace_as_eleven == 0:
+    if (ace_as_one == 0) and (ace_as_eleven == 0):
         return print(f'Your hard count is: {count}.')
 
     count_with_one = count + ace_as_one
