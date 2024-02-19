@@ -141,41 +141,45 @@ def deal_card_dealer():
         return rand_card
     
 def player_hand_check():
-    hard_count = 0
-    ace_check = 0
+    count = 0
+    ace_as_one = 0
+    ace_as_eleven = 0
+
     for card in player_cards:
         if card in aces:
-            hard_count += 1
-            ace_check += 11
+            ace_as_one += 1
+            ace_as_eleven += 11
         elif card in twos:
-            hard_count += 2
+            count += 2
         elif card in threes:
-            hard_count += 3
+            count += 3
         elif card in fours:
-            hard_count += 4
+            count += 4
         elif card in fives:
-            hard_count += 5
+            count += 5
         elif card in sixes:
-            hard_count += 6
+            count += 6
         elif card in sevens:
-            hard_count += 7
+            count += 7
         elif card in eights:
-            hard_count += 8
+            count += 8
         elif card in nines:
-            hard_count += 9
+            count += 9
         elif card in tens:
-            hard_count += 10
+            count += 10
 
-    soft_count = (hard_count - 1) + ace_check
+    if ace_as_one and ace_as_eleven == 0:
+        return print(f'Your hard count is: {count}.')
 
-    if soft_count == 21:
+    count_with_one = count + ace_as_one
+    count_with_eleven = count + ace_as_eleven
+
+    if count_with_eleven == 21:
         print(f'Winner Winner, Chicken Dinner. Thats 21. Blackjack!!!')
-    elif soft_count > 21:
-        print(f'You have two Aces!! Wow :). That makes your hard count 22, becasue fo this you must choose your soft count of: {soft_count}. How would you like to proceed?')
-    elif soft_count > 0 and soft_count < 21:
-        print(f' You have an Ace! Your hard count is: {hard_count}. Your soft count of: {soft_count}. How would you like to proceed?')
-    else:
-        print(f'Your hard total is: {hard_count}.')
+    elif count_with_eleven > 21:
+        print(f'You have two Aces!! Wow :). That makes your soft count 22, because of this you must choose your hard count of: {count_with_one}. How would you like to proceed?')
+    elif (count_with_one and count_with_eleven < 21) and (count_with_one and count_with_eleven > 0): 
+        print(f' You have an Ace! Your hard count is: {count_with_one}. Your soft count of: {count_with_eleven}. How would you like to proceed?')
         
 
 # If the program is run (instead of imported), run the game:
