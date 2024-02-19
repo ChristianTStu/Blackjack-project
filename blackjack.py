@@ -118,6 +118,7 @@ tens = [
 def deal_card():
     rand_suit = random.randint(0, (len(suits) - 1))
     rand_num = random.randint(0, (len(cards_in_deck) - 1))
+    print('Your card is the...')
     rand_card = cards_in_deck[rand_num] + ' of ' + suits[rand_suit]
     player_cards.append(rand_card)
     return rand_card
@@ -157,6 +158,12 @@ def player_hand_check():
         elif card in tens:
             count += 10
 
+    if count > 21:
+        print('Thats a Bust!')
+        print('Better luck next time!!')
+
+        exit()
+
     if (ace_as_one == 0) and (ace_as_eleven == 0):
         return print(f'Your hard count is: {count}.')
 
@@ -165,11 +172,24 @@ def player_hand_check():
 
     if count_with_eleven == 21:
         print('Winner Winner, Chicken Dinner. Thats 21. Blackjack!!!')
+        print('Congratulations on your winnings!!')
+
+        exit()
     elif count_with_eleven > 21:
-        print(f'You have two Aces!! Wow :). That makes your soft count 22, because of this you must choose your hard count of: {count_with_one}. How would you like to proceed?')
+        print(f'You have two Aces!! Wow :). That makes your soft count 22, because of this you must choose your hard count of: {count_with_one}.')
     elif (count_with_one and count_with_eleven < 21) and (count_with_one and count_with_eleven > 0): 
-        print(f' You have an Ace! Your hard count is: {count_with_one}. Your soft count of: {count_with_eleven}. How would you like to proceed?')
-        
+        print(f'You have an Ace! Your hard count is: {count_with_one}. Your soft count of: {count_with_eleven}.')
+
+def player_options():
+    if player_choice == 'hit':
+        print(deal_card())
+        player_hand_check()
+    elif player_choice == 'stay':
+        pass
+    elif player_choice == 'split':
+        pass
+    elif player_choice == 'double':
+        pass
 
 # If the program is run (instead of imported), run the game:
 if __name__ == '__main__':
@@ -177,13 +197,13 @@ if __name__ == '__main__':
     
 # Main Game Loop
 while True:
-    print('Your first card is...')
     print(deal_card())
     deal_card_dealer()
     print("The dealer's first card is hidden.")
-    print('Your second card is...')
     print(deal_card())
     print("The dealer's second card is...")
     print(deal_card_dealer())
     player_hand_check()
+    player_choice = input('How would you like to proceed? Hit, Stay, Split, or Double?:').lower()
+    player_options()
     break
