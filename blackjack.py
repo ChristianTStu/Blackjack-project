@@ -119,9 +119,7 @@ def deal_card():
     rand_suit = random.randint(0, (len(suits) - 1))
     rand_num = random.randint(0, (len(cards_in_deck) - 1))
     rand_card = cards_in_deck[rand_num] + ' of ' + suits[rand_suit]
-    if rand_card in player_cards:
-        deal_card()
-    elif rand_card in dealer_cards:
+    if (rand_card in player_cards) or (rand_card in dealer_cards):
         deal_card()
     else:
         player_cards.append(rand_card)
@@ -131,10 +129,8 @@ def deal_card_dealer():
     rand_suit = random.randint(0, (len(suits) - 1))
     rand_num = random.randint(0, (len(cards_in_deck) - 1))
     rand_card = cards_in_deck[rand_num] + ' of ' + suits[rand_suit]
-    if rand_card in player_cards:
-        deal_card_dealer()
-    elif rand_card in dealer_cards:
-        deal_card_dealer()
+    if (rand_card in player_cards) or (rand_card in dealer_cards):
+        deal_card()
     else:
         dealer_cards.append(rand_card)
         return rand_card
